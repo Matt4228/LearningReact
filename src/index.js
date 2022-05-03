@@ -74,26 +74,84 @@ class Board extends React.Component {
       );
   }
 
+
+  buildRow(rowNum, size) {
+    //let row = [];
+
+    //for(let i = 0; i < size; i++) {
+    //  row.push(this.renderSquare(rowNum*size+i));
+    //}
+
+    //return(row);
+
+
+    let tmp = [];
+
+    for(let i = 0; i < size; i++) {
+      tmp.push(i);
+    }
+
+    const board = tmp.map((sq) => {
+      let sqNum = rowNum * 3 + sq
+      console.log(sqNum)
+      return(
+        <div className="board-row" key={sqNum}>
+          {this.renderSquare({sqNum})}
+        </div>
+      );
+    });
+
+    return(board);
+
+  }
+
+
+  buildBoard(size) {
+    let tmp = [];
+
+    for(let i = 0; i < size; i++) {
+      tmp.push(i);
+    }
+
+    const board = tmp.map((row) => {
+      return(
+        <div className="board-row" key={row}>
+          {this.buildRow({row}, size)}
+        </div>
+      );
+    });
+
+    return(board);
+  };
+
+
   render() {
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+        {this.buildBoard(3)}
       </div>
     );
+      
+    
+    // return (
+    //   <div>
+    //     <div className="board-row">
+    //       {this.renderSquare(0)}
+    //       {this.renderSquare(1)}
+    //       {this.renderSquare(2)}
+    //     </div>
+    //     <div className="board-row">
+    //       {this.renderSquare(3)}
+    //       {this.renderSquare(4)}
+    //       {this.renderSquare(5)}
+    //     </div>
+    //     <div className="board-row">
+    //       {this.renderSquare(6)}
+    //       {this.renderSquare(7)}
+    //       {this.renderSquare(8)}
+    //     </div>
+    //   </div>
+    // );
   }
 }
 
