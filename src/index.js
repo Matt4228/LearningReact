@@ -68,6 +68,7 @@ class Board extends React.Component {
     return (
       <Square 
         value={this.props.squares[i]}
+        key={i}
         highlight={this.props.highlights[i]}
         onClick={() => this.props.onClick(i)}
       />
@@ -75,62 +76,102 @@ class Board extends React.Component {
   }
 
 
-  buildRow(rowNum, size) {
-    //let row = [];
+  // buildRow(startIndex, size) {
+  //   //let row = [];
 
-    //for(let i = 0; i < size; i++) {
-    //  row.push(this.renderSquare(rowNum*size+i));
-    //}
+  //   //for(let i = 0; i < size; i++) {
+  //   //  row.push(this.renderSquare(rowNum*size+i));
+  //   //}
 
-    //return(row);
-
-
-    let tmp = [];
-
-    for(let i = 0; i < size; i++) {
-      tmp.push(i);
-    }
-
-    const board = tmp.map((sq) => {
-      let sqNum = rowNum * 3 + sq
-      console.log(sqNum)
-      return(
-        <div className="board-row" key={sqNum}>
-          {this.renderSquare({sqNum})}
-        </div>
-      );
-    });
-
-    return(board);
-
-  }
+  //   //return(row);
 
 
-  buildBoard(size) {
-    let tmp = [];
+  //   let tmp = [];
 
-    for(let i = 0; i < size; i++) {
-      tmp.push(i);
-    }
+  //   for(let i = 0; i < size; i++) {
+  //     //console.log(rowNum*3 + i)
+  //     tmp.push(startIndex + i);
+  //   }
+  //   //console.log(tmp);
 
-    const board = tmp.map((row) => {
-      return(
-        <div className="board-row" key={row}>
-          {this.buildRow({row}, size)}
-        </div>
-      );
-    });
+  //   const board = tmp.map((sq) => {
+  //     //console.log({sq})
+  //     return(
+  //       this.renderSquare(sq)
+  //     );
+  //   });
 
-    return(board);
-  };
+  //   return(board);
+
+  // }
+
+
+  // buildBoard(size) {
+  //   let tmp = [];
+
+  //   for(let i = 0; i < size; i++) {
+  //     tmp.push(i);
+  //   }
+
+  //   const board = tmp.map((row) => {
+  //     return(
+  //       <div className="board-row" key={row}>
+  //         {this.buildRow(row * size, size)}
+  //       </div>
+  //     );
+  //   });
+
+  //   return(board);
+  // };
+
+  // createSquares() {
+  //   let rows = [];
+  //   const size = 3;
+
+  //   for(let i = 0; i < size; i++) {
+  //     let squares = [];
+  //     for(let j = 0; j < size; j++) {
+  //       squares.push(this.renderSquare(3*i+j));
+  //     }
+  //     rows.push(<div className="board-row">{squares}</div>);
+  //   }
+
+
+  //   return rows;
+  // }
 
 
   render() {
-    return (
+    // return (
+    //   <div>
+    //     {this.buildBoard(3)}
+    //   </div>
+    // );
+
+    var self = this;
+    return(
       <div>
-        {this.buildBoard(3)}
+        {[1, 2, 3].map(function(row, rowIdx) {
+          return (
+            <div className='board-row' key={rowIdx}>
+              {
+                [1, 2, 3].map((col, colIdx) => {
+                  return self.renderSquare((3 * rowIdx) + colIdx);
+                })
+              }
+            </div>
+          );
+        })}
       </div>
     );
+
+    
+
+    // return(
+    //   <div>
+    //     {this.createSquares()}
+    //   </div>
+    // );
       
     
     // return (
